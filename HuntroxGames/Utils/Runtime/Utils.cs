@@ -176,5 +176,9 @@ namespace HuntroxGames.Utils
                 volume = - 144f;
             target.SetFloat(volumeParameter, volume);
         }
+        
+        public static byte[] JsonToByteArray<T>(T json) where T : IJson<T>
+            => new System.Text.UTF8Encoding().GetBytes(json.ToJson());
+
     }
 }
