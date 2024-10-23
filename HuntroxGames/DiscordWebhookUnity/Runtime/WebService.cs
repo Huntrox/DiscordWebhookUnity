@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -41,11 +40,10 @@ namespace HuntroxGames.Utils.DiscordWebhook
                     for (var i = 0; i < webhook.attachments.Length; i++)
                     {
                         var index = i;
-                        var filePath = webhook.attachments[index].filePath;
                         var fileData = webhook.attachments[index].fileData;
                         
-                        var mffs = CreateMultipartFormFileSection("files[" + index + "]",fileData, webhook.attachments[index].filename);
-                        multipartFormSections.Add(mffs);
+                        var multipartFormFile = CreateMultipartFormFileSection("files[" + index + "]",fileData, webhook.attachments[index].filename);
+                        multipartFormSections.Add(multipartFormFile);
                     }
 
                 var webhookUrl = webhook.webhook_Url;
