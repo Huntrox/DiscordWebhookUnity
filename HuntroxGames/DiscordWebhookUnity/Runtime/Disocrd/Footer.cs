@@ -1,4 +1,4 @@
-﻿namespace HuntroxGames.Utils
+﻿namespace HuntroxGames.Utils.DiscordWebhook
 {
     [System.Serializable]
     public class Footer

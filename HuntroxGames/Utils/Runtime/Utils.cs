@@ -180,5 +180,6 @@ namespace HuntroxGames.Utils
         public static byte[] JsonToByteArray<T>(T json) where T : IJson<T>
             => new System.Text.UTF8Encoding().GetBytes(json.ToJson());
 
+
     }
 }

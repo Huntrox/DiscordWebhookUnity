@@ -1,11 +1,23 @@
-﻿namespace HuntroxGames.Utils
+﻿using UnityEngine;
+
+namespace HuntroxGames.Utils.DiscordWebhook
 {
     [System.Serializable]
     public class Thumbnail
     {
         public string url;
-        public string proxy_url;
-        public int height;
-        public int width;
+        [HideInInspector]public string proxy_url;
+        [HideInInspector]public int height;
+        [HideInInspector]public int width;
+        
+        public Thumbnail(string url)
+        {
+            this.url = url;
+        }
+
+        public Thumbnail()
+        {
+            
+        }
     }
 }

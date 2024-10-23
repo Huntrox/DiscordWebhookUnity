@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using HuntroxGames.Utils;
+
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HuntroxGames.Utils
+namespace HuntroxGames.Utils.DiscordWebhook
 {
     
     public class WebService : Singleton<WebService>
-    {    
-        public const string DISCORD_WEBHOOK = "";
-
+    {
         protected override void Awake()
         {
             destroyOnLoad = false;
@@ -21,13 +19,13 @@ namespace HuntroxGames.Utils
             
         }
         
-        
         public static void SendDiscordWebhook(Webhook webhook) => Instance.DiscordWebhook(webhook);
 
         private void DiscordWebhook(Webhook webhook)
         {
             StartCoroutine(DiscordWebhookProcess(webhook));
-
+            return;
+            
             IEnumerator DiscordWebhookProcess(Webhook webhook)
             {
                 
@@ -42,34 +40,47 @@ namespace HuntroxGames.Utils
                 if (!webhook.attachments.IsNullOrEmpty())
                     for (var i = 0; i < webhook.attachments.Length; i++)
                     {
-                        var filePath = webhook.attachments[i].filePath;
                         var index = i;
-                        var fileData = File.ReadAllBytes(filePath);
+                        var filePath = webhook.attachments[index].filePath;
+                        var fileData = webhook.attachments[index].fileData;
                         
-                        multipartFormSections.Add(new MultipartFormFileSection("files[" + index + "]", fileData, webhook.attachments[index].filename, "image/jpeg"));
+                        var mffs = CreateMultipartFormFileSection("files[" + index + "]",fileData, webhook.attachments[index].filename);
+                        multipartFormSections.Add(mffs);
                     }
 
-                var webhookUrl = DISCORD_WEBHOOK;
+                var webhookUrl = webhook.webhook_Url;
                 var request = UnityWebRequest.Post(webhookUrl, multipartFormSections);
                 
                 using (request)
                 {
                     yield return request.SendWebRequest();
-                    if (request.result == UnityWebRequest.Result.ConnectionError
-                        || request.result == UnityWebRequest.Result.ProtocolError)
+                    if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
                     {
                         Debug.Log("Webhook request failed: " + request.error);
-                        Debug.Log(request.downloadHandler.text);
                     }
                     else
                     {
                         Debug.Log("Webhook request sent successfully!");
-                        Debug.Log(request.downloadHandler.text);
-
                     }
+                    webhook.onWebhookResponse?.Invoke(request.downloadHandler.text);
                 }
             }
         }
+
+        private static MultipartFormFileSection CreateMultipartFormFileSection(string name,byte[] fileData, string filename)
+        {
+            var contentType = Path.GetExtension(filename) switch
+            {
+                ".txt" => "text/plain",
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".png" => "image/png",
+                ".gif" => "image/gif",
+                _ => "file/" + Path.GetExtension(filename)
+            };
+            return new MultipartFormFileSection(name, fileData, filename, contentType);
+        }
+        
+        
     }   
 
 }
