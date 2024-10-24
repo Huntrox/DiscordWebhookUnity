@@ -7,31 +7,38 @@ namespace HuntroxGames.Utils
     {
         public string myWebhookURl;
         public Webhook webhook;
-        [Header("From Texture2D Example")]
-        public Texture2D texture2D;
-        
-        
-        private void Start() 
+        public WebhookResponse response;
+        [Header("From Texture2D Example")] public Texture2D texture2D;
+
+
+        private void Start()
             => Send();
-        
-        public void Send() 
+
+        public void Send()
             => webhook.SendWebhook(myWebhookURl);
-        
+
         public void SendWebHook()
         {
             var discordWebhook = new Webhook()
-                .SetAuthor("My Webhook name", "https://avatars.githubusercontent.com/u/34078403?v=4")//author of the webhook
-                .SetContent("this webhook contains img uploaded from Resources Folder")//text content of the webhook
-                .AddAttachment(Application.dataPath+"/StreamingAssets/ExampleFiles/exampleTxtFile.txt","myExampleFile","File Attachment Loaded From StreamingAssets")
-                .AddImgAttachmentRes("Files/ExampleJpegResourceFile","myExampleImage", "Example Img Attachment Loaded From Resources Folder")//adding img attachment from Resources
+                .SetAuthor("My Webhook name",
+                    "https://avatars.githubusercontent.com/u/34078403?v=4") //author of the webhook
+                .SetContent("this webhook contains img uploaded from Resources Folder") //text content of the webhook
+                .AddAttachment(Application.dataPath + "/StreamingAssets/ExampleFiles/exampleTxtFile.txt",
+                    "myExampleFile", "File Attachment Loaded From StreamingAssets")
+                .AddImgAttachmentRes("Files/ExampleJpegResourceFile", "myExampleImage",
+                    "Example Img Attachment Loaded From Resources Folder") //adding img attachment from Resources
                 .AddEmbed(Embed.CreateEmbed("HuntroxGames", "this is an example embed", Color.red)
                     .CreateNewField("this is an example inline field A", "this is an example value", true)
                     .CreateNewField("this is an example inline field B", "this is an example value", true)
-                    .SetImage("myExampleImage")//referencing img attachment with unique reference key
+                    .SetImage("myExampleImage") //referencing img attachment with unique reference key
                     .SetFooter("HuntroxGames", "https://avatars.githubusercontent.com/u/34078403?v=4"))
                 .AddEmbed(Embed.CreateEmbed("Just another embed", "just another embed description", Color.blue)
                     .CreateThumbnail("myExampleImage"))
-                .SetResponseCallback(Debug.Log);//log the response
+                .SetResponseCallback(res =>
+                {
+                    Debug.Log(res);
+                    response = new WebhookResponse().FromJson(res);
+                }); //log the response
             discordWebhook.SendWebhook(myWebhookURl);
         }
 
@@ -53,7 +60,8 @@ namespace HuntroxGames.Utils
                 content = "this webhook contains img uploaded from Resources Folder",
                 attachments = new Attachment[]
                 {
-                    new Attachment(Application.dataPath + "/StreamingAssets/ExampleFiles/exampleTxtFile.txt", "myExampleFile"),
+                    new Attachment(Application.dataPath + "/StreamingAssets/ExampleFiles/exampleTxtFile.txt",
+                        "myExampleFile"),
                     new ImageAttachment("Files/ExampleJpegResourceFile", "myExampleImage")
                 },
                 embeds = new Embed[]
