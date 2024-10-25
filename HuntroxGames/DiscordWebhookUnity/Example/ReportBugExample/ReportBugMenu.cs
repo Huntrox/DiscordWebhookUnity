@@ -14,6 +14,7 @@ namespace HuntroxGames
         [SerializeField] private string webhookUrl = "";
         
         [Header("UI Elements")]
+        [SerializeField] private TMP_InputField reportTitleTextField;
         [SerializeField] private TMP_InputField reportTextField;
         [SerializeField] private Toggle playerLogToggle;
         [SerializeField] private Toggle systemInfoToggle;
@@ -31,12 +32,16 @@ namespace HuntroxGames
             };
             
             // getting user input
+            var reportTitle = reportTitleTextField.text;
             var report = reportTextField.text;
             var playerLog = playerLogToggle.isOn;
             var systemInfo = systemInfoToggle.isOn;
             
+            //formatting title and report text
+            var webhookContent = $"# __{reportTitle}__\n\n{report}";
+            
             //set webhook content from user input
-            webhook.SetContent(report);
+            webhook.SetContent(webhookContent);
 
             // checking if user wants to send player log
             //if yes, create attachment with player log file and add it to webhook
@@ -72,6 +77,7 @@ namespace HuntroxGames
                     new Field { name = "OS", value = SystemInfo.operatingSystem },
                     new Field { name = "CPU", value = SystemInfo.processorType ,inline = true},
                     new Field { name = "Memory", value = SystemInfo.systemMemorySize.ToString() ,inline = true},
+                    new Field { name = "", value ="" ,inline = false},//empty line to break fields
                     new Field { name = "GPU", value = SystemInfo.graphicsDeviceName ,inline = true},
                     new Field { name = "GPU Memory", value = SystemInfo.graphicsMemorySize.ToString() ,inline = true},
                     new Field { name = "Screen", value = $"{Screen.width}x{Screen.height}" },
