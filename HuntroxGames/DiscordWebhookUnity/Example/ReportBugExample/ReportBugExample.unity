@@ -400,7 +400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423995038
 GameObject:
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1769683930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: HuntroxGames.ReportBugMenu, Assembly-CSharp
         m_MethodName: SendReport
         m_Mode: 1
@@ -736,7 +736,7 @@ RectTransform:
   m_Children:
   - {fileID: 1769683929}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1516,6 +1516,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1576015799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576015801}
+  - component: {fileID: 1576015800}
+  m_Layer: 0
+  m_Name: Report <- Scripts Here
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1576015800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576015799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d847e7428ae82f34da19ebb6d58dae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  webhookName: Bug Report Bot
+  webhookAvatarUrl: 
+  webhookUrl: https://discord.com/api/webhooks/1299372532918390835/F6cdcsvcZmM8hmpeY8I25xRe9i3sdf1NvwsD9SFi2pVorK7l8XpDtQ7SaREKHfeoy2eY
+  reportTitleTextField: {fileID: 1276034490}
+  reportTextField: {fileID: 1666129272}
+  playerLogToggle: {fileID: 1525940362}
+  systemInfoToggle: {fileID: 679638088}
+--- !u!4 &1576015801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576015799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6258041, y: 0.5469537, z: -10.011206}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1634693295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,7 +1985,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1769683929}
-  - component: {fileID: 1769683930}
   m_Layer: 5
   m_Name: reportMenu
   m_TagString: Untagged
@@ -1966,25 +2016,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -13.2248}
   m_SizeDelta: {x: 270.5856, y: 216.8608}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1769683930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769683928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d847e7428ae82f34da19ebb6d58dae44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  webhookName: Bug Report Bot
-  webhookAvatarUrl: 
-  webhookUrl: https://discord.com/api/webhooks/1299372532918390835/F6cdcsvcZmM8hmpeY8I25xRe9i3sdf1NvwsD9SFi2pVorK7l8XpDtQ7SaREKHfeoy2eY
-  reportTitleTextField: {fileID: 1276034490}
-  reportTextField: {fileID: 1666129272}
-  playerLogToggle: {fileID: 1525940362}
-  systemInfoToggle: {fileID: 679638088}
 --- !u!1 &1841800385
 GameObject:
   m_ObjectHideFlags: 0
