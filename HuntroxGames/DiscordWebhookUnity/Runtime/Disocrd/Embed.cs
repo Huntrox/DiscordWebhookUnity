@@ -31,6 +31,13 @@ namespace HuntroxGames.Utils.DiscordWebhook
             };
         }
         
+        public Embed SetTitle(string title)
+        {
+            this.title = title;
+            return this;
+        }
+        
+        
         public Embed CreateNewField(string name, string value, bool inline = false)
         {
             var field = new Field
@@ -113,7 +120,6 @@ namespace HuntroxGames.Utils.DiscordWebhook
                     if (attachmentDict.TryGetValue(image.url, out var attachment))
                     {
                         image.url = ImageAttachment.ToAttachmentPath(attachment.filename);
-                        Debug.Log(image.url);
                     }
                 }
             }
