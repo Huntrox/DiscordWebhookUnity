@@ -3,7 +3,7 @@ DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook mess
 
 ![img](https://i.imgur.com/SFLGpMf.png)
 
-## Features
+# Features
 
 - Send Discord webhook messages with content, embeds, and attachments.
 - Support for image and text file attachments.
@@ -15,12 +15,12 @@ DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook mess
 - Example code and scenes.
 
 
-## Installation
+# Installation
 
 1. Clone or download the repository or download the latest [release](https://github.com/HuntroxGames/DiscordWebhookUnity).
 2. Copy the `HuntroxGames` folder into your Unity project's `Assets` directory.
 
-## Usage
+# Usage
 
 ### Simple Webhook
 
@@ -79,15 +79,13 @@ also note when adding Attachment, you need to provide a `referencekey` to identi
 
 ```csharp
     var webhook = new Webhook()
-        .SetAuthor("My Webhook name")
-        .SetContent("This webhook contains an image and a text file")
-        .AddAttachment(Application.dataPath + "/StreamingAssets/ExampleFiles/exampleTxtFile.txt", "myExampleFile", "File Attachment")
+        .SetAuthor("Bug Report Bot")
+        .SetContent("USER INPUT")
+        .AddAttachment(Application.persistentDataPath + "/player.log", "playerLogFile", "File Attachment")
         .AddImgAttachmentRes("Files/ExampleJpegResourceFile", "myExampleImage", "Image Attachment");
-    
     webhook.SendWebhook(myWebhookURl);
 ```
-
-
+![Imgur](https://i.imgur.com/ajMJlRM.png)
 
 ### Adding Embeds
 
@@ -96,18 +94,20 @@ To include embeds in your webhook messages:
 ```csharp
     var webhook = new Webhook()
         .SetAuthor("My Webhook name")
-        .SetContent("This webhook contains an embed")
+        .SetContent("This webhook contains an embed with img attachment")
         .AddImgAttachmentRes("Files/ExampleJpegResourceFile", "myExampleImage", "Image Attachment")
         .AddEmbed(Embed.CreateEmbed("Embed Title", "Embed Description", Color.red)
             .CreateNewField("Field Name", "Field Value", true)
+            .CreateNewField("Another Field Name", "Another Field Value", true)
             .SetImage("myExampleImage")
-            .SetFooter("Footer Text", "https://avatars.githubusercontent.com/u/34078403?v=4"));
+            .SetFooter("Footer Text", "https://avatars.githubusercontent.com/u/34078403?v=4")
+            .SetAuthor("This is the author","https://github.com/Huntrox","myExampleImage"));
     webhook.SendWebhook(myWebhookURl);
 ```
 as you can see in `SetImage` we used the `referencekey: "myExampleImage"` to reference the attachment previously added with the same reference key.
 this makes it possible to use the same attachment in multiple embeds. also 
 providing an external URL to the image will work as well.
-
+![Imgur](https://i.imgur.com/sXOPZcZ.png)
 ### Discord Timestamp Utility
 
 this tool provides a utility function to convert a `DateTime` object to a Discord adding more to your webhook message.
@@ -119,7 +119,7 @@ this tool provides a utility function to convert a `DateTime` object to a Discor
 ```
 ![img](https://i.imgur.com/SqxmKRW.png)
 
-## API Reference
+# API Reference
 
 ### Webhook Class
 
