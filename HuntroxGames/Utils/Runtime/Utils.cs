@@ -195,7 +195,7 @@ namespace HuntroxGames.Utils
                 DiscordTimestampFormat.LongDate => $"<t:{ts}:D>",
                 DiscordTimestampFormat.LongDateWithShortTime => $"<t:{ts}:f>",
                 DiscordTimestampFormat.LongDateWithDayOfWeekAndShortTime => $"<t:{ts}:F>",
-                DiscordTimestampFormat.Relative => ToDiscordRelativeTimestamp(timestamp),
+                DiscordTimestampFormat.Relative => $"<t:{ts}:R>",
                 _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
             };
         }
