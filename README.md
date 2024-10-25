@@ -112,8 +112,10 @@ providing an external URL to the image will work as well.
 - `AddAttachment(string filePath, string referenceKey, string description = "")`: Adds an attachment to the webhook message.
 - `AddImgAttachmentRes(string filePath, string referenceKey, string description = "")`: Loads an image file from Resources as an attachment and adds it to the webhook message.
 - `AddTextAttachmentRes(string filePath, string referenceKey, string description = "")`: Loads a text file from Resources as an attachment and adds it to the webhook message.
-- `SetResponseCallback(Action<WebhookResponse> callback)`: Sets the callback for webhook responses. 
+- `SetResponseCallback(Action<string,bool> callback)`: Sets the callback for webhook responses. 
+- `SetProgressCallback(Action<float> callback)`: Sets the callback for webhook progress. Returns a floating-point value between 0.0 and 1.0, indicating the progress of uploading body data to the server.
 - `SendWebhook(string webhook_Url)`: Sends the webhook message to the specified URL.
+
 
 ### Embed Class
 

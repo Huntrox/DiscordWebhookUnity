@@ -1,5 +1,7 @@
 using System;
 using HuntroxGames.Utils.DiscordWebhook;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HuntroxGames.Examples
@@ -10,7 +12,10 @@ namespace HuntroxGames.Examples
     {
         [Header("References")]
         [SerializeField] private ScreenshotCapture screenshotCapture;
-        
+        [Header("Upload Progress Screen")]
+        [SerializeField] private GameObject uploadProgressScreen;
+        [SerializeField] private GameObject doneButton;
+        [SerializeField] private TextMeshProUGUI uploadProgressText;
         [Header("Webhook Settings")] 
         [SerializeField] private string webhookName = "Happy Bot";
         [SerializeField] private string webhookAvatarUrl = ""; 
@@ -28,7 +33,6 @@ namespace HuntroxGames.Examples
         private void OnCaptureFinished(Texture2D texture)
         {
             //Creating ImageAttachment from Texture2D by using the utility function ImageAttachment.FromTexture2D
-            
             var textureAttachment = ImageAttachment.FromTexture2D(texture, "MyScreenshot");
 
             var discordWebhook = new Webhook()
@@ -45,6 +49,20 @@ namespace HuntroxGames.Examples
                 discordWebhook.AddEmbed(embed);
             }
             
+            //progress callback
+            discordWebhook.SetProgressCallback(progress =>
+            {
+                doneButton.SetActive(false);//hide done button
+                uploadProgressScreen.SetActive(true);//show upload progress screen
+                uploadProgressText.text = "Uploading... " + (int)(progress * 100) + "%";//update upload progress text with progress received from callback
+            });
+            //response callback
+            discordWebhook.SetResponseCallback((res, isError) =>
+            {
+                doneButton.SetActive(true);//show done button when the process is finished
+                uploadProgressText.text = isError? "Upload Failed. Try Again." : "Upload Complete. Thank You!";//update upload progress text with result of the process failed or succeeded
+                
+            });
             discordWebhook.SendWebhook(webhookUrl);
         }
     }

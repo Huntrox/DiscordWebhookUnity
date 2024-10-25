@@ -24,12 +24,12 @@ namespace HuntroxGames.Utils.DiscordWebhook
         {
             StartCoroutine(DiscordWebhookProcess(webhook));
             return;
-            
+
             IEnumerator DiscordWebhookProcess(Webhook webhook)
             {
-                
+
                 var payloadJsonBytes = Utils.JsonToByteArray(webhook);
-                
+
                 var multipartFormSections = new List<IMultipartFormSection>
                 {
                     new MultipartFormDataSection("payload_json", payloadJsonBytes)
@@ -41,28 +41,41 @@ namespace HuntroxGames.Utils.DiscordWebhook
                     {
                         var index = i;
                         var fileData = webhook.attachments[index].fileData;
-                        
-                        var multipartFormFile = CreateMultipartFormFileSection("files[" + index + "]",fileData, webhook.attachments[index].filename);
+
+                        var multipartFormFile = CreateMultipartFormFileSection("files[" + index + "]", fileData,
+                            webhook.attachments[index].filename);
                         multipartFormSections.Add(multipartFormFile);
                     }
 
                 var webhookUrl = webhook.webhook_Url;
                 var request = UnityWebRequest.Post(webhookUrl, multipartFormSections);
+
+                var hasProgressCallback = webhook.onWebhookRequestProgress != null;
                 
-                using (request)
+                
+                request.SendWebRequest();
+
+                
+                while (!request.isDone)
                 {
-                    yield return request.SendWebRequest();
-                    var isError = request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError;
-                    if (isError)
-                    {
-                        Debug.Log("Webhook request failed: " + request.error);
-                    }
-                    else
-                    {
-                        Debug.Log("Webhook request sent successfully!");
-                    }
-                    webhook.onWebhookResponse?.Invoke(request.downloadHandler.text,isError);
+                    var progress = request.uploadProgress;
+                    if (hasProgressCallback)
+                        webhook.onWebhookRequestProgress?.Invoke(progress);
+                    yield return null;
                 }
+                
+                if (hasProgressCallback)
+                    webhook.onWebhookRequestProgress?.Invoke(1.0f);
+
+                var isError =
+                    request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError;
+
+                Debug.Log(isError
+                    ? "Webhook request failed: " + request.error
+                    : "Webhook request sent successfully!");
+
+
+                webhook.onWebhookResponse?.Invoke(request.downloadHandler.text, isError);
             }
         }
 

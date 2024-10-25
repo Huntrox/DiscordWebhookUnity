@@ -9,6 +9,8 @@ namespace HuntroxGames.Utils.DiscordWebhook
     {
         
         public delegate void OnWebhookResponse(string responseBody, bool isError);
+        public delegate void OnWebhookRequestProgress(float progress);
+        
         
         [NonSerialized]public string webhook_Url;
         public string username;
@@ -21,6 +23,11 @@ namespace HuntroxGames.Utils.DiscordWebhook
         /// returns response text and if it was successful or not
         /// </summary>
         public OnWebhookResponse onWebhookResponse;
+        /// <summary>
+        /// set this if you want to receive a webhook request progress
+        /// </summary>
+        public OnWebhookRequestProgress onWebhookRequestProgress;
+        
         public string thread_name;
 
         public string ToJson()
@@ -59,6 +66,19 @@ namespace HuntroxGames.Utils.DiscordWebhook
             this.content = content;
             return this;
         }
+
+        /// <summary>
+        /// Note: Webhooks can only create threads in forum channels
+        /// </summary>
+        /// <param name="thread_name"></param>
+        /// <returns></returns>
+        public Webhook SetThreadName(string thread_name)
+        {
+            this.thread_name = thread_name;
+            return this;
+        }
+        
+        
 
         public Webhook SetAuthor(string username, string avatar_url="")
         {
@@ -105,6 +125,12 @@ namespace HuntroxGames.Utils.DiscordWebhook
         public Webhook SetResponseCallback(OnWebhookResponse callback)
         {
             onWebhookResponse = callback;
+            return this;
+        }
+        
+        public Webhook SetProgressCallback(OnWebhookRequestProgress callback)
+        {
+            onWebhookRequestProgress = callback;
             return this;
         }
     }
