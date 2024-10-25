@@ -107,6 +107,18 @@ To include embeds in your webhook messages:
 as you can see in `SetImage` we used the `referencekey: "myExampleImage"` to reference the attachment previously added with the same reference key.
 this makes it possible to use the same attachment in multiple embeds. also 
 providing an external URL to the image will work as well.
+
+### Discord Timestamp Utility
+
+this tool provides a utility function to convert a `DateTime` object to a Discord adding more to your webhook message.
+```csharp
+    var webhook = new Webhook()
+        .SetAuthor("Time bot")
+        .SetContent($"This webhook was sent at {Utils.Utils.DateToDiscordTimestamp(DateTime.Now, DiscordTimestampFormat.Relative)}")
+        .SendWebhook(webhookUrl);
+```
+![img](https://i.imgur.com/SqxmKRW.png)
+
 ## API Reference
 
 ### Webhook Class
@@ -126,10 +138,11 @@ providing an external URL to the image will work as well.
 
 - `CreateEmbed(string title, string description, Color color)`: Creates a new embed.
 - `CreateNewField(string name, string value, bool inline)`: Adds a new field to the embed.
-- `SetImage(string url)`: Sets the image of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or Direct URL.
+- `SetImage(string url)`: Sets the image of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or **Direct URL**.
 - `SetFooter(string text, string icon_url)`: Sets the footer of the embed.
-- `SetThumbnail(string url)`: Sets the thumbnail of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or Direct URL.
-
+- `SetThumbnail(string url)`: Sets the thumbnail of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or **Direct URL**.
+- `SetAuthor(string name, string url, string icon_url)`: Sets the author of the embed. use the `referencekey` in `icon_url` to reference the attachment previously added with the same reference key or **Direct URL**.
+- `SetColor(Color color)`: changes the color of the embed.
 ### Attachment Types
 - `Attachment`: Used to load file attachment directly from a file path. e.g. `"c:/path/to/file.txt"`.
 - `TextAttachment`: Used to load text file attachment directly from Resources. e.g. `"Files/file.txt"`, files must be in the Resources folder. 

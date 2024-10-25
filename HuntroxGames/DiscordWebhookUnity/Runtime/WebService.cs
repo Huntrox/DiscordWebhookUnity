@@ -76,6 +76,8 @@ namespace HuntroxGames.Utils.DiscordWebhook
 
 
                 webhook.onWebhookResponse?.Invoke(request.downloadHandler.text, isError);
+                
+                request.Dispose();
             }
         }
 

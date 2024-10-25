@@ -116,10 +116,11 @@ namespace HuntroxGames.Utils.DiscordWebhook
             return this;
         }
         
-        public void SendWebhook(string webhook_Url)
+        public Webhook SendWebhook(string webhook_Url)
         {
             this.webhook_Url = webhook_Url;
             WebService.SendDiscordWebhook(this);
+            return this;
         }
 
         public Webhook SetResponseCallback(OnWebhookResponse callback)

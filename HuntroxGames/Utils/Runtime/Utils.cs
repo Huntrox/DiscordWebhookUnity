@@ -182,9 +182,9 @@ namespace HuntroxGames.Utils
 
         
         public static string ToDiscordRelativeTimestamp(DateTime timestamp)
-         => TimestampToDiscordTimestamp(timestamp, DiscordTimestampFormat.Relative);
+         => DateToDiscordTimestamp(timestamp, DiscordTimestampFormat.Relative);
 
-        public static string TimestampToDiscordTimestamp(DateTime timestamp, DiscordTimestampFormat format = DiscordTimestampFormat.ShortTime)
+        public static string DateToDiscordTimestamp(DateTime timestamp, DiscordTimestampFormat format = DiscordTimestampFormat.ShortTime)
         {
             var ts = (long)(timestamp.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
             return format switch
@@ -199,16 +199,15 @@ namespace HuntroxGames.Utils
                 _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
             };
         }
-        
-        public enum DiscordTimestampFormat
-        {
-            ShortTime,
-            LongTime,
-            ShortDate,
-            LongDate,
-            LongDateWithShortTime,
-            LongDateWithDayOfWeekAndShortTime,
-            Relative,
-        }
+    }
+    public enum DiscordTimestampFormat
+    {
+        ShortTime,
+        LongTime,
+        ShortDate,
+        LongDate,
+        LongDateWithShortTime,
+        LongDateWithDayOfWeekAndShortTime,
+        Relative,
     }
 }

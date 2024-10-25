@@ -1,14 +1,15 @@
 using HuntroxGames.Utils.DiscordWebhook;
 using UnityEngine;
 
-namespace HuntroxGames.Utils
+namespace HuntroxGames.Examples
 {
     public class WebhookSendExample : MonoBehaviour
     {
         public string myWebhookURl;
         public Webhook webhook;
         public WebhookResponse response;
-        [Header("From Texture2D Example")] public Texture2D texture2D;
+        [Header("From Texture2D Example")] 
+        public Texture2D texture2D;
 
 
         private void Start()
@@ -49,8 +50,9 @@ namespace HuntroxGames.Utils
                 .SetContent("this webhook contains img uploaded from Texture2D")
                 .AddAttachment(ImageAttachment.FromTexture2D(texture2D, "myExampleImage"));
             discordWebhook.SendWebhook(myWebhookURl);
-        }
 
+        }
+        
         public void DemoWebhookCont()
         {
             var discordWebhook = new Webhook()
