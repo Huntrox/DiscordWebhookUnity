@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webhookName: Bug Report Bot
   webhookAvatarUrl: 
-  webhookUrl: https://discord.com/api/webhooks/1299372532918390835/F6cdcsvcZmM8hmpeY8I25xRe9i3sdf1NvwsD9SFi2pVorK7l8XpDtQ7SaREKHfeoy2eY
+  webhookUrl: 
   reportTitleTextField: {fileID: 1276034490}
   reportTextField: {fileID: 1666129272}
   playerLogToggle: {fileID: 1525940362}

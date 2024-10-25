@@ -29,7 +29,7 @@ namespace HuntroxGames.Examples
             captureFrame = false;
             preview = new Texture2D(captureSize.x, captureSize.y, TextureFormat.RGB565, false);
             var rect = new Rect(0, 0, captureSize.x, captureSize.y);
-            preview.name = "ScreenshotPreview";
+            preview.name = "Screenshot Preview";
             preview.ReadPixels(rect, 0, 0);
             preview.Apply();
             RenderTexture.ReleaseTemporary(captureCam.targetTexture);

@@ -22,9 +22,9 @@ namespace HuntroxGames.Utils.DiscordWebhook
         /// <param name="description"></param>
         public Attachment(string filePath, string referenceKey, string description = "")
         {
-            this.filePath = filePath;
             this.description = description;
-            this.filename = System.IO.Path.GetFileName(filePath);
+            this.filename = System.IO.Path.GetFileName(filePath).Replace(" ", "_");
+            this.filePath = filePath;
             this.refKey = referenceKey;
         }
 
@@ -49,7 +49,7 @@ namespace HuntroxGames.Utils.DiscordWebhook
         public ImageAttachment(string filePath, string referenceKey, string description = "")
         {
             this.filePath = filePath;
-            this.filename = filePath.Split('/').Last() + ".png";
+            this.filename = filePath.Replace(" ", "_").Split('/').Last() + ".png";
             this.refKey = referenceKey;
             this.description = description;
         }
@@ -88,7 +88,7 @@ namespace HuntroxGames.Utils.DiscordWebhook
         public TextAttachment(string filePath, string referenceKey, string description = "")
         {
             this.filePath = filePath;
-            this.filename = filePath.Split('/').Last() + ".txt";
+            this.filename = filePath.Replace(" ", "_").Split('/').Last() + ".txt";
             this.refKey = referenceKey;
             this.description = description;
         }
