@@ -114,7 +114,7 @@ this tool provides a utility function to convert a `DateTime` object to a Discor
 ```csharp
     var webhook = new Webhook()
         .SetAuthor("Time bot")
-        .SetContent($"This webhook was sent at {Utils.Utils.DateToDiscordTimestamp(DateTime.Now, DiscordTimestampFormat.Relative)}")
+        .SetContent($"This webhook was sent {Utils.Utils.DateToDiscordTimestamp(DateTime.Now, DiscordTimestampFormat.Relative)}")
         .SendWebhook(webhookUrl);
 ```
 ![img](https://i.imgur.com/SqxmKRW.png)
