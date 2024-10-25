@@ -180,6 +180,35 @@ namespace HuntroxGames.Utils
         public static byte[] JsonToByteArray<T>(T json) where T : IJson<T>
             => new System.Text.UTF8Encoding().GetBytes(json.ToJson());
 
+        
+        public static string ToDiscordRelativeTimestamp(DateTime timestamp)
+         => TimestampToDiscordTimestamp(timestamp, DiscordTimestampFormat.Relative);
 
+        public static string TimestampToDiscordTimestamp(DateTime timestamp, DiscordTimestampFormat format = DiscordTimestampFormat.ShortTime)
+        {
+            var ts = (long)(timestamp.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
+            return format switch
+            {
+                DiscordTimestampFormat.ShortTime => $"<t:{ts}:t>",
+                DiscordTimestampFormat.LongTime => $"<t:{ts}:T>",
+                DiscordTimestampFormat.ShortDate => $"<t:{ts}:d>",
+                DiscordTimestampFormat.LongDate => $"<t:{ts}:D>",
+                DiscordTimestampFormat.LongDateWithShortTime => $"<t:{ts}:f>",
+                DiscordTimestampFormat.LongDateWithDayOfWeekAndShortTime => $"<t:{ts}:F>",
+                DiscordTimestampFormat.Relative => ToDiscordRelativeTimestamp(timestamp),
+                _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
+            };
+        }
+        
+        public enum DiscordTimestampFormat
+        {
+            ShortTime,
+            LongTime,
+            ShortDate,
+            LongDate,
+            LongDateWithShortTime,
+            LongDateWithDayOfWeekAndShortTime,
+            Relative,
+        }
     }
 }

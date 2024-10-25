@@ -592,8 +592,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HuntroxGames.ReportBugMenu, Assembly-CSharp
+      - m_Target: {fileID: 1576015800}
+        m_TargetAssemblyTypeName: HuntroxGames.Examples.ReportBugMenu, Assembly-CSharp
         m_MethodName: SendReport
         m_Mode: 1
         m_Arguments:

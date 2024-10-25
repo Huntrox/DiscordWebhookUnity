@@ -1,3 +1,4 @@
+using System;
 using HuntroxGames.Utils.DiscordWebhook;
 using TMPro;
 using UnityEngine;
@@ -38,7 +39,8 @@ namespace HuntroxGames.Examples
             var systemInfo = systemInfoToggle.isOn;
             
             //formatting title and report text
-            var webhookContent = $"# __{reportTitle}__\n\n{report}";
+            var timeStamp = Utils.Utils.ToDiscordRelativeTimestamp(DateTime.Now);
+            var webhookContent = $"# __{reportTitle}__\n\n{report} \n\n{timeStamp}";
             
             //set webhook content from user input
             webhook.SetContent(webhookContent);
