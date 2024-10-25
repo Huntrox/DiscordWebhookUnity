@@ -147,7 +147,7 @@ this tool provides a utility function to convert a `DateTime` object to a Discor
 - `Attachment`: Used to load file attachment directly from a file path. e.g. `"c:/path/to/file.txt"`.
 - `TextAttachment`: Used to load text file attachment directly from Resources. e.g. `"Files/file.txt"`, files must be in the Resources folder. 
 - `ImageAttachment`: Used to load image attachment directly from Resources. e.g. `"Files/file.png"`, files must be in the Resources folder.
-- `ImageAttachment.FromTexture2D(Texture2D texture)`: Used to load texture attachment directly from a Texture2D.
+- `ImageAttachment.FromTexture2D(Texture2D texture)`: Used to load image attachment directly from a Texture2D.
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
