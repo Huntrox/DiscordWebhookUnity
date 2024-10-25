@@ -52,7 +52,8 @@ namespace HuntroxGames.Utils.DiscordWebhook
                 using (request)
                 {
                     yield return request.SendWebRequest();
-                    if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
+                    var isError = request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError;
+                    if (isError)
                     {
                         Debug.Log("Webhook request failed: " + request.error);
                     }
@@ -60,7 +61,7 @@ namespace HuntroxGames.Utils.DiscordWebhook
                     {
                         Debug.Log("Webhook request sent successfully!");
                     }
-                    webhook.onWebhookResponse?.Invoke(request.downloadHandler.text);
+                    webhook.onWebhookResponse?.Invoke(request.downloadHandler.text,isError);
                 }
             }
         }

@@ -34,7 +34,7 @@ namespace HuntroxGames.Utils
                     .SetFooter("HuntroxGames", "https://avatars.githubusercontent.com/u/34078403?v=4"))
                 .AddEmbed(Embed.CreateEmbed("Just another embed", "just another embed description", Color.blue)
                     .CreateThumbnail("myExampleImage"))
-                .SetResponseCallback(res =>
+                .SetResponseCallback((res,isError) =>
                 {
                     Debug.Log(res);
                     response = new WebhookResponse().FromJson(res);

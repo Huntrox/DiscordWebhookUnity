@@ -8,13 +8,19 @@ namespace HuntroxGames.Utils.DiscordWebhook
     public class Webhook : IJson<Webhook>
     {
         
+        public delegate void OnWebhookResponse(string responseBody, bool isError);
+        
         [NonSerialized]public string webhook_Url;
         public string username;
         public string avatar_url;
         public string content;
         public Embed[] embeds;
         public Attachment[] attachments;
-        public Action<string> onWebhookResponse;
+        /// <summary>
+        /// set this if you want to receive a response
+        /// returns response text and if it was successful or not
+        /// </summary>
+        public OnWebhookResponse onWebhookResponse;
         public string thread_name;
 
         public string ToJson()
@@ -96,7 +102,7 @@ namespace HuntroxGames.Utils.DiscordWebhook
             WebService.SendDiscordWebhook(this);
         }
 
-        public Webhook SetResponseCallback(Action<string> callback)
+        public Webhook SetResponseCallback(OnWebhookResponse callback)
         {
             onWebhookResponse = callback;
             return this;
