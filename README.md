@@ -1,13 +1,18 @@
 # DiscordWebhookUnity
 DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook messages directly from your Unity projects. This package supports sending messages with content, embeds, and attachments such as images and text files.
 
+![img](https://i.imgur.com/SFLGpMf.png)
+
 ## Features
 
 - Send Discord webhook messages with content, embeds, and attachments.
 - Support for image and text file attachments.
 - Support for sending multiple embeds and attachments in a single message.
 - Easy-to-use API for creating and sending webhook messages.
-- Callback support for handling webhook responses.
+- Callback support for handling webhook responses. 
+- Progress callback when processing requests.
+- Discord timestamp conversion utility function. 
+- Example code and scenes.
 
 
 ## Installation
@@ -19,7 +24,7 @@ DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook mess
 
 ### Simple Webhook
 
-Easy way to send a webhook message using method chaining:
+Easy way to send a webhook message using helpful methods:
 ```csharp
     var webhook = new Webhook()
         .SetAuthor("My Webhook name", "https://avatars.githubusercontent.com/u/34078403?v=4")
@@ -67,9 +72,10 @@ Construct a `Webhook` instance and have more control over its properties:
     webhook.SendWebhook(myWebhookURl);
 ```
 
-### Sending Attachments
+### Adding Attachments
 
-You can also send attachments with your webhook messages:
+To include attachments in your webhook simply use the `AddAttachment` or `AddImgAttachmentRes` or `AddTextAttachmentRes` methods.
+also note when adding Attachment, you need to provide a `referencekey` to identify the attachment and helps with referencing the attachment in the embed Thumbnail or Image fields.
 
 ```csharp
     var webhook = new Webhook()
@@ -81,10 +87,9 @@ You can also send attachments with your webhook messages:
     webhook.SendWebhook(myWebhookURl);
 ```
 
-when adding Attachment, you need to provide a `referencekey` to identify the attachment and helps with referencing the attachment in the embed Thumbnail or Image fields.
 
 
-### Sending Embeds
+### Adding Embeds
 
 To include embeds in your webhook messages:
 
@@ -121,9 +126,9 @@ providing an external URL to the image will work as well.
 
 - `CreateEmbed(string title, string description, Color color)`: Creates a new embed.
 - `CreateNewField(string name, string value, bool inline)`: Adds a new field to the embed.
-- `SetImage(string url)`: Sets the image of the embed.
+- `SetImage(string url)`: Sets the image of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or Direct URL.
 - `SetFooter(string text, string icon_url)`: Sets the footer of the embed.
-- `SetThumbnail(string url)`: Sets the thumbnail of the embed.
+- `SetThumbnail(string url)`: Sets the thumbnail of the embed. use the `referencekey` to reference the attachment previously added with the same reference key or Direct URL.
 
 ### Attachment Types
 - `Attachment`: Used to load file attachment directly from a file path. e.g. `"c:/path/to/file.txt"`.

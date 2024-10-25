@@ -79,7 +79,16 @@ namespace HuntroxGames.Utils.DiscordWebhook
             };
             return this;
         }
-        
+        public Embed SetAuthor(string name, string url = "", string icon_url = "")
+        {
+            author = new Author
+            {
+                name = name,
+                url = url,
+                icon_url = icon_url
+            };
+            return this;
+        }
         
         public Embed CreateEmbedAuthor(string name, string url = "", string icon_url = "")
         {
