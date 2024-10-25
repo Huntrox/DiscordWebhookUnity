@@ -17,7 +17,7 @@ DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook mess
 
 # Installation
 
-1. Clone or download the repository or download the latest [release](https://github.com/HuntroxGames/DiscordWebhookUnity).
+1. Clone or download the repository or download the latest [release](https://github.com/Huntrox/DiscordWebhookUnity/releases/download/v1.0.0/DiscordWebhookForUnity_1.0.0.unitypackage).
 2. Copy the `HuntroxGames` folder into your Unity project's `Assets` directory.
 
 # Usage
