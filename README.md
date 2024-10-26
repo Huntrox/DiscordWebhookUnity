@@ -22,6 +22,11 @@ DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook mess
 
 # Usage
 
+### Getting Webhook URL
+
+To get the webhook URL you need to go to your Discord server settings and copy the webhook URL. 
+for more information see [Discord documentation](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+
 ### Simple Webhook
 
 Easy way to send a webhook message using helpful methods:
