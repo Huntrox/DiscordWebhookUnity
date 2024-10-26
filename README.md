@@ -1,4 +1,4 @@
-# DiscordWebhookUnity
+# Unity Discord Webhooks
 DiscordWebhookUnity is a Unity Tool that allows you to send Discord webhook messages directly from your Unity projects. This package supports sending messages with content, embeds, and attachments such as images and text files.
 
 ![img](https://i.imgur.com/SFLGpMf.png)
